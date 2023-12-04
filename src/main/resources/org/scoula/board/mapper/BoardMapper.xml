@@ -11,4 +11,9 @@
 		]]>
     </select>
 
+    <select id="get" resultType="BoardVO">
+        select * from tbl_board where no = #{no}
+    </select>
+
+
 </mapper>

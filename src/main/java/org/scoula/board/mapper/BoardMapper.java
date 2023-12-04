@@ -9,4 +9,5 @@ public interface BoardMapper {
     //@Select("select * from tbl_board")
     public List<BoardVO> getList();
 
+    public BoardVO get(Long no);
 }
