@@ -1,0 +1,59 @@
+plugins {
+    id 'java'
+    id 'war'
+}
+
+group = 'org.scoula'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // sprint context, spring-webmvc
+    implementation ('org.springframework:spring-context:5.3.30')
+            { exclude group: 'commons-logging', module: 'commons-logging' }
+    implementation 'org.springframework:spring-webmvc:5.3.30'
+
+    // inject
+    implementation 'javax.inject:javax.inject:1'
+
+    // aspect j
+    runtimeOnly 'org.aspectj:aspectjrt:1.9.20'
+    runtimeOnly 'org.aspectj:aspectjweaver:1.9.20'
+    // logging slf4j
+    implementation 'org.slf4j:slf4j-api:2.0.9'
+    runtimeOnly 'org.slf4j:jcl-over-slf4j:2.0.9'
+    runtimeOnly 'org.slf4j:slf4j-log4j12:2.0.9'
+    implementation 'log4j:log4j:1.2.17'
+
+    // 한글 경로 포함시 xml parser
+    implementation 'xerces:xercesImpl:2.12.2'
+
+    // lombok
+    compileOnly 'org.projectlombok:lombok:1.18.30'
+    annotationProcessor 'org.projectlombok:lombok:1.18.30'
+
+    // servlet, jsp, jstl
+    compileOnly 'javax.servlet:javax.servlet-api:3.1.0'
+    compileOnly 'javax.servlet.jsp:jsp-api:2.1'
+    implementation 'javax.servlet:jstl:1.2'
+
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.9.4'
+
+    // 유효성 검사
+    implementation 'javax.validation:validation-api:2.0.1.Final'
+    implementation 'org.hibernate.validator:hibernate-validator:6.0.7.Final'
+
+    // 테스트
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.8.1'
+    testImplementation 'org.springframework:spring-test:5.3.30'
+
+    testCompileOnly 'org.projectlombok:lombok:1.18.30'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.30'
+}
+
+test {
+    useJUnitPlatform()
+}
