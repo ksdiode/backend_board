@@ -32,13 +32,23 @@
     </logger>
 
 
-    <logger name="jdbc.sqlonly">
-        <level value="info" />
+    <logger name="jdbc.audit">
+        <level value="warn" />
+    </logger>
+
+
+    <logger name="jdbc.audit">
+        <level value="warn" />
+    </logger>
+
+
+    <logger name="jdbc.audit">
+        <level value="warn" />
     </logger>
 
     <!-- Root Logger -->
     <root>
-        <priority value="warn" />
+        <priority value="info" />
         <appender-ref ref="console" />
     </root>
 
