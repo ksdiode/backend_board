@@ -14,7 +14,7 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import javax.sql.DataSource;
 
 @Configuration
-// @MapperScan(basePackages  = {})
+@MapperScan(basePackages  = {"org.scoula.board.mapper"})
 public class RootConfig {
     @Bean
     public DataSource dataSource() {
