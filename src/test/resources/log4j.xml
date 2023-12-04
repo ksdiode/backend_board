@@ -32,19 +32,15 @@
     </logger>
 
 
-    <logger name="jdbc.audit">
+    <logger name="jdbc">
         <level value="warn" />
     </logger>
 
 
-    <logger name="jdbc.audit">
-        <level value="warn" />
+    <logger name="jdbc.sqlonly">
+        <level value="info" />
     </logger>
 
-
-    <logger name="jdbc.audit">
-        <level value="warn" />
-    </logger>
 
     <!-- Root Logger -->
     <root>
