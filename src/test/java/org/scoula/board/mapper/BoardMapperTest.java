@@ -65,5 +65,9 @@ class BoardMapperTest {
         log.info("UPDATE COUNT: " + count);
     }
 
-
+    @Test
+    @DisplayName("BoardMapper의 글 삭제")
+    public void testDelete() {
+        log.info("DELETE COUNT: " + mapper.delete(3L));
+    }
 }
