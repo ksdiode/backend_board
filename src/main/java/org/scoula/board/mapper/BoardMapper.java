@@ -10,4 +10,7 @@ public interface BoardMapper {
     public List<BoardVO> getList();
 
     public BoardVO get(Long no);
+
+    public void create(BoardVO board);
+
 }

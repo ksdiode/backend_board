@@ -34,7 +34,20 @@ class BoardMapperTest {
         BoardVO board = mapper.get(5L);
 
         log.info(board);
+    }
 
+    @Test
+    @DisplayName("BoardMapper의 새글 작성")
+    public void testCreate() {
+
+        BoardVO board = new BoardVO();
+        board.setTitle("새로 작성하는 글");
+        board.setContent("새로 작성하는 내용");
+        board.setWriter("user0");
+
+        mapper.create(board);
+
+        log.info(board);
     }
 
 }
