@@ -6,7 +6,7 @@ import org.scoula.board.domain.BoardVO;
 import java.util.List;
 
 public interface BoardMapper {
-    @Select("select * from tbl_board")
+    //@Select("select * from tbl_board")
     public List<BoardVO> getList();
 
 }
