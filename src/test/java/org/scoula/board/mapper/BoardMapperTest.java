@@ -50,4 +50,20 @@ class BoardMapperTest {
         log.info(board);
     }
 
+    @Test
+    @DisplayName("BoardMapper의 글 수정")
+    public void testUpdate() {
+
+        BoardVO board = new BoardVO();
+        board.setNo(5L);
+        board.setTitle("수정된 제목");
+        board.setContent("수정된 내용");
+        board.setWriter("user00");
+
+        int count = mapper.update(board);
+
+        log.info("UPDATE COUNT: " + count);
+    }
+
+
 }

@@ -13,4 +13,6 @@ public interface BoardMapper {
 
     public void create(BoardVO board);
 
+    public int update(BoardVO board);
+
 }
