@@ -15,20 +15,26 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                // 모두 허용
-                .antMatchers("/test", "/test/all").permitAll()
-                // 특정 역할에게만 허용
-                .antMatchers("/test/admin").access("hasRole('ROLE_ADMIN')")
-                .antMatchers("/test/member").access("hasRole('ROLE_MEMBER')")
-                // 로그인 사용자에게만 허용
-                .antMatchers("/board/create", "/board/update", "/board/delete").authenticated();
+            // 모두 허용
+            .antMatchers("/test", "/test/all").permitAll()
+            // 특정 역할에게만 허용
+            .antMatchers("/test/admin").access("hasRole('ROLE_ADMIN')")
+            .antMatchers("/test/member").access("hasRole('ROLE_MEMBER')")
+            // 로그인 사용자에게만 허용
+            .antMatchers("/board/create", "/board/update", "/board/delete").authenticated();
 
-        http.formLogin()										// 로그인 설정 시작
-                .loginPage("/auth/login")					// 로그인 페이지 GET URL
-                .loginProcessingUrl("/auth/login"	)	// 로그인 POST URL
-                .defaultSuccessUrl("/");					// 로그인 성공시 이동할 페이지
+        http.formLogin()							// 로그인 설정 시작
+            .loginPage("/auth/login")				// 로그인 페이지 GET URL
+            .loginProcessingUrl("/auth/login"	)	// 로그인 POST URL
+            .defaultSuccessUrl("/");				// 로그인 성공시 이동할 페이지
 
 
+
+        http.logout()								// 로그아웃 설정 시작
+            .logoutUrl("/auth/logout")				// POST: 로그아웃 호출 url
+            .invalidateHttpSession(true)			// 세션 invalidate
+            .deleteCookies("remember-me", "JSESSION-ID")	// 삭제할 쿠키 목록
+            .logoutSuccessUrl("/");					// 로그아웃 이후 이동할 페이지
 
     }
 
