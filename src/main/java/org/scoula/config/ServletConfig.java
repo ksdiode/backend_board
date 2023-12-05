@@ -19,7 +19,8 @@ import java.io.IOException;
 @ComponentScan(basePackages = {
         "org.scoula.exception",
         "org.scoula.controller",
-        "org.scoula.board.controller"
+        "org.scoula.board.controller",
+        "org.scoula.security.controller"
 })
 public class ServletConfig implements WebMvcConfigurer {
 
