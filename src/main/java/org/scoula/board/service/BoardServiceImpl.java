@@ -18,26 +18,46 @@ public class BoardServiceImpl implements BoardService {
 
     @Override
     public List<BoardVO> getList() {
-        return null;
+
+        log.info("getList..........");
+
+        return mapper.getList();
     }
+
 
     @Override
     public BoardVO get(Long no) {
-        return null;
+
+        log.info("get......" + no);
+
+        return mapper.get(no);
+
     }
+
 
     @Override
     public void create(BoardVO board) {
 
+        log.info("create......" + board);
+
+        mapper.create(board);
     }
+
 
     @Override
     public boolean update(BoardVO board) {
-        return false;
+
+        log.info("update......" + board);
+
+        return mapper.update(board) == 1;
     }
 
     @Override
     public boolean delete(Long no) {
-        return false;
+
+        log.info("delete...." + no);
+
+        return mapper.delete(no) == 1;
     }
+
 }
