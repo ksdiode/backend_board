@@ -20,7 +20,6 @@ import java.io.IOException;
         "org.scoula.exception",
         "org.scoula.controller",
         "org.scoula.board.controller"
-
 })
 public class ServletConfig implements WebMvcConfigurer {
 
