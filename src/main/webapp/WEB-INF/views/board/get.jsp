@@ -22,8 +22,8 @@
 
 <div class="mt-4">
     <a href="list" class="btn btn-primary"><i class="fas fa-list"></i> 목록</a>
-    <a href="modify?no=${board.no}" class="btn btn-primary"><i class="far fa-edit"></i> 수정</a>
-    <a href="remove?no=${board.no}" class="btn btn-primary"><i class="fas fa-trash-alt"></i> 삭제</a>
+    <a href="update?no=${board.no}" class="btn btn-primary"><i class="far fa-edit"></i> 수정</a>
+    <a href="delete?no=${board.no}" class="btn btn-primary"><i class="fas fa-trash-alt"></i> 삭제</a>
 </div>
 
 <%@include file="../layouts/footer.jsp"%>

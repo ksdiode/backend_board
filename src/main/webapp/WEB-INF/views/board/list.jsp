@@ -31,3 +31,12 @@
     </tbody>
 
 </table>
+
+<div class="text-right">
+    <a href="create" class="btn btn-primary">
+        <i class="far fa-edit"></i>
+        글쓰기
+    </a>
+</div>
+
+<%@include file="../layouts/footer.jsp"%>
