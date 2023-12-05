@@ -2,11 +2,14 @@ package org.scoula.security.config;
 
 
 import lombok.extern.log4j.Log4j;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
@@ -44,14 +47,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         auth.inMemoryAuthentication()
                 .withUser("admin")
-                .password("{noop}1234")
+//			.password("{noop}1234")		// {noop} 암호화처리 하지않음
+                .password("$2a$10$EsIMfxbJ6NuvwX7MDj4WqOYFzLU9U/lddCyn0nic5dFo3VfJYrXYC")	// 암호화된 비밀번호
                 .roles("ADMIN");
 
         auth.inMemoryAuthentication()
                 .withUser("member")
-                .password("{noop}1234")
+//			.password("{noop}1234") 		// {noop} 암호화처리 하지않음
+                .password("$2a$10$EsIMfxbJ6NuvwX7MDj4WqOYFzLU9U/lddCyn0nic5dFo3VfJYrXYC") 	// 암호화된 비밀번호
                 .roles("MEMBER");
+
     }
 
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 
 }
