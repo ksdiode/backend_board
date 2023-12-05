@@ -4,6 +4,15 @@
 
 <%@include file="../layouts/header.jsp"%>
 
+<script>
+    $(document).ready(async function() {
+        $('.delete').click(function(){
+            if(!confirm('정말 삭제할까요?')) return;
+            $('#deleteForm').submit();
+        });
+    });
+</script>
+
 <h1 class="page-header my-4"><i class="far fa-file-alt"></i> ${board.title}</h1>
 
 <div class="d-flex justify-content-between">
@@ -23,7 +32,12 @@
 <div class="mt-4">
     <a href="list" class="btn btn-primary"><i class="fas fa-list"></i> 목록</a>
     <a href="update?no=${board.no}" class="btn btn-primary"><i class="far fa-edit"></i> 수정</a>
-    <a href="delete?no=${board.no}" class="btn btn-primary"><i class="fas fa-trash-alt"></i> 삭제</a>
+    <a href="#" class="btn btn-primary delete"><i class="fas fa-trash-alt"></i> 삭제</a>
 </div>
+
+<form action="delete" method="post" id="deleteForm">
+    <input type="hidden" name="no" value="${board.no}"/>
+</form>
+
 
 <%@include file="../layouts/footer.jsp"%>
