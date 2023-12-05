@@ -6,11 +6,11 @@ import org.scoula.board.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import javax.validation.Valid;
 
 @Controller
 @Log4j
@@ -29,14 +29,22 @@ public class BoardController {
 
 
     @GetMapping("/create")
-    public void create() {
+    public void create(@ModelAttribute("board") BoardVO board) {
         log.info("create");
     }
 
+
+
     @PostMapping("/create")
-    public String create(BoardVO board, RedirectAttributes ra) {
+    public String create(@Valid @ModelAttribute("board") BoardVO board,
+                         Errors errors,
+                         RedirectAttributes ra) {
 
         log.info("create: " + board);
+
+        if(errors.hasErrors()) {
+            return "board/create";
+        }
 
         service.create(board);
 
@@ -53,8 +61,14 @@ public class BoardController {
     }
 
     @PostMapping("/update")
-    public String update(BoardVO board, RedirectAttributes ra) {
+    public String update(@Valid @ModelAttribute("board") BoardVO board,
+                         Errors errors,
+                         RedirectAttributes ra) {
         log.info("update:" + board);
+
+        if(errors.hasErrors()) {
+            return "board/update";
+        }
 
         if (service.update(board)) {
             ra.addFlashAttribute("result", "success");
