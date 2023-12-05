@@ -24,7 +24,8 @@
 
 <div>
     <form:form modelAttribute="board" role="form" >
-        <form:hidden path="bno"/>
+        <form:hidden path="no"/>
+        <form:hidden path="writer"/>
 
         <div class="form-group">
             <form:label path="title">제목</form:label>
@@ -32,18 +33,13 @@
             <form:errors path="title" cssClass="error"/>
         </div>
 
-        <div class="form-group">
-            <form:label path="writer">작성자</form:label>
-            <form:input path="writer" cssClass="form-control" />
-            <form:errors path="writer" cssClass="error"/>
-        </div>
+        <!-- writer 설정 부분 제거 -->
 
         <div class="form-group">
             <form:label path="content">내용</form:label>
             <form:textarea path="content" class="form-control"></form:textarea>
             <form:errors path="content" cssClass="error"/>
         </div>
-
 
         <button type="submit" class="btn btn-primary"><i class="fas fa-check"></i> 확인</button>
         <button type="reset" class="btn btn-primary"><i class="fas fa-undo"></i> 취소</button>

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.security.Principal;
 
 @Controller
 @Log4j
@@ -38,7 +39,8 @@ public class BoardController {
     @PostMapping("/create")
     public String create(@Valid @ModelAttribute("board") BoardVO board,
                          Errors errors,
-                         RedirectAttributes ra) {
+                         RedirectAttributes ra,
+                         Principal principal) {
 
         log.info("create: " + board);
 
@@ -46,6 +48,8 @@ public class BoardController {
             return "board/create";
         }
 
+        String username = principal.getName();
+        board.setWriter(username);
         service.create(board);
 
         ra.addFlashAttribute("result", board.getNo());
