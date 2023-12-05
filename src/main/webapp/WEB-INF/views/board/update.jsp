@@ -4,6 +4,21 @@
 
 <%@include file="../layouts/header.jsp"%>
 
+<link rel="stylesheet" href="/resources/vendors/summernote/summernote-lite.min.css">
+<script src="/resources/vendors/summernote/summernote-lite.min.js"></script>
+<script src="/resources/vendors/summernote/lang/summernote-ko-KR.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+		$('#summernote').summernote({
+            height: 300,				// 에디터 높이
+            focus: true,				// 에디터 로딩 후 포커스 부여 여부
+            lang: "ko-KR",			// 한글 설정
+         });
+
+    });
+</script>
+
 <h1 class="page-header my-4"><i class="far fa-edit"></i> 글 수정</h1>
 
 <div>
@@ -21,7 +36,7 @@
 
         <div class="form-group">
             <label>내용</label>
-            <textarea class="form-control" name="content" rows="10">${board.content}</textarea>
+            <textarea class="form-control" id="summernote" name="content" rows="10">${board.content}</textarea>
         </div>
 
         <button type="submit" class="btn btn-primary">
