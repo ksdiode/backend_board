@@ -87,7 +87,20 @@ class BoardControllerTest {
                 .getViewName();
 
         log.info(resultPage);
+    }
 
+    @Test
+    public void testDelete() throws Exception {
+        // 삭제전 데이터베이스에 게시물 번호 확인할 것
+        String resultPage = mockMvc.perform(
+                        MockMvcRequestBuilders
+                                .post("/board/delete")
+                                .param("no", "25") )
+                .andReturn()
+                .getModelAndView()
+                .getViewName();
+
+        log.info(resultPage);
     }
 
 }
