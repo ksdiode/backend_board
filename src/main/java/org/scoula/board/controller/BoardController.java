@@ -53,4 +53,14 @@ public class BoardController {
         model.addAttribute("board", service.get(no));
     }
 
+    @PostMapping("/update")
+    public String update(BoardVO board, RedirectAttributes ra) {
+        log.info("update:" + board);
+
+        if (service.update(board)) {
+            ra.addFlashAttribute("result", "success");
+        }
+        return "redirect:/board/list";
+    }
+
 }
