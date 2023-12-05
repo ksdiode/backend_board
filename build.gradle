@@ -16,6 +16,13 @@ dependencies {
             { exclude group: 'commons-logging', module: 'commons-logging' }
     implementation 'org.springframework:spring-webmvc:5.3.30'
 
+    // 스프링 시큐리티
+    implementation 'org.springframework.security:spring-security-web:5.8.8'
+    implementation 'org.springframework.security:spring-security-config:5.8.8'
+    implementation 'org.springframework.security:spring-security-core:5.8.8'
+    implementation 'org.springframework.security:spring-security-taglibs:5.8.8'
+
+
     // inject
     implementation 'javax.inject:javax.inject:1'
 
