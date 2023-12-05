@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 
 <%@ include file="../layouts/header.jsp" %>
 
@@ -17,11 +18,17 @@
     <li><a href="/test/member">member</a></li>
 </ul>
 
-<a href="/auth/login">로그인</a> / <a href="#" id="logout-btn">로그아웃</a>
+<sec:authorize access="isAnonymous()">
+    <a href="/auth/login">로그인</a>
+</sec:authorize>
 
-<form action="/auth/logout" id="logoutForm" method="post">
-    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-</form>
+<sec:authorize access="isAuthenticated()">
+    <sec:authentication property="principal.username"/>
+    <a href="#" id="logout-btn">로그아웃</a>
+    <form action="/auth/logout" name="logoutForm" method="post">
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+    </form>
+</sec:authorize>
 
 
 <%@ include file="../layouts/footer.jsp" %>
