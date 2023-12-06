@@ -27,4 +27,7 @@ public class MemberMapperTest {
             log.info(auth);
         }
     }
+
+
+
 }

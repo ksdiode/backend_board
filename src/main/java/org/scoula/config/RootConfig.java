@@ -15,7 +15,10 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import javax.sql.DataSource;
 
 @Configuration
-@ComponentScan(basePackages={ "org.scoula.board.service" })
+@ComponentScan(basePackages={
+        "org.scoula.board.service",
+        "org.scoula.security.service"
+})
 @MapperScan(basePackages  = {
         "org.scoula.board.mapper",
         "org.scoula.security.mapper"

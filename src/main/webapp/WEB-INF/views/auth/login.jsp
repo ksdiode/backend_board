@@ -30,6 +30,11 @@
             <i class="fa-solid fa-right-to-bracket"></i> 로그인
         </button>
 
+        <a href="/auth/signup" class="btn btn-primary btn-block">
+            <i class="fa-solid fa-user-plus"></i>
+            회원가입
+        </a>
+
     </form>
 </div>
 

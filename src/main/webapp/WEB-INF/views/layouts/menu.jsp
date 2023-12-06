@@ -29,7 +29,7 @@
                 <sec:authentication property="principal.username" var="username" />
                 <li class="nav-item">
                     <a class="nav-link" href="/member/profile">
-                        <img src="/member/avatar/sm/${username}" class="avatar-sm"/>
+                        <img src="/auth/avatar/${username}" class="avatar-sm"/>
                         ${username}
                     </a>
                 </li>
