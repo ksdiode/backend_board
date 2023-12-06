@@ -13,6 +13,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 
 import javax.sql.DataSource;
 
@@ -20,6 +22,15 @@ import javax.sql.DataSource;
 @EnableWebSecurity
 @Log4j
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+    @Bean
+    public PersistentTokenRepository persistentTokenRepository() {
+        JdbcTokenRepositoryImpl repo = new JdbcTokenRepositoryImpl();
+        repo.setDataSource(dataSource);
+
+        return repo;
+    }
+
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
@@ -43,6 +54,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .invalidateHttpSession(true)			// 세션 invalidate
             .deleteCookies("remember-me", "JSESSION-ID")	// 삭제할 쿠키 목록
             .logoutSuccessUrl("/");					// 로그아웃 이후 이동할 페이지
+
+        http.rememberMe()		// remember-me 기능 설정
+                .key("Galapagos")
+                .tokenRepository(persistentTokenRepository())
+                .tokenValiditySeconds(7*24*60*60);	// 7일
 
     }
 

@@ -20,6 +20,12 @@
             <input type="password" name="password" id="password" class="form-control" />
         </div>
 
+        <div class="form-group form-check">
+            <label class="form-check-label">
+                <input class="form-check-input" type="checkbox" name="remember-me" /> 로그인 유지
+            </label>
+        </div>
+
         <button type="submit" class="btn btn-primary btn-block">
             <i class="fa-solid fa-right-to-bracket"></i> 로그인
         </button>
