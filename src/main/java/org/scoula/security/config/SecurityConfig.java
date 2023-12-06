@@ -2,14 +2,19 @@ package org.scoula.security.config;
 
 
 import lombok.extern.log4j.Log4j;
+import org.scoula.security.service.CustomUserDetailsService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+
+import javax.sql.DataSource;
 
 @Configuration
 @EnableWebSecurity
@@ -41,21 +46,33 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     }
 
+
+    @Autowired
+    private DataSource dataSource;
+
+    @Bean
+    public UserDetailsService customUserService() {
+        return new CustomUserDetailsService();
+    }
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         log.info("configure .........................................");
 
-        auth.inMemoryAuthentication()
-                .withUser("admin")
-//			.password("{noop}1234")		// {noop} 암호화처리 하지않음
-                .password("$2a$10$EsIMfxbJ6NuvwX7MDj4WqOYFzLU9U/lddCyn0nic5dFo3VfJYrXYC")	// 암호화된 비밀번호
-                .roles("ADMIN");
-
-        auth.inMemoryAuthentication()
-                .withUser("member")
-//			.password("{noop}1234") 		// {noop} 암호화처리 하지않음
-                .password("$2a$10$EsIMfxbJ6NuvwX7MDj4WqOYFzLU9U/lddCyn0nic5dFo3VfJYrXYC") 	// 암호화된 비밀번호
-                .roles("MEMBER");
+//        auth.inMemoryAuthentication()
+//                .withUser("admin")
+////			.password("{noop}1234")		// {noop} 암호화처리 하지않음
+//                .password("$2a$10$EsIMfxbJ6NuvwX7MDj4WqOYFzLU9U/lddCyn0nic5dFo3VfJYrXYC")	// 암호화된 비밀번호
+//                .roles("ADMIN");
+//
+//        auth.inMemoryAuthentication()
+//                .withUser("member")
+////			.password("{noop}1234") 		// {noop} 암호화처리 하지않음
+//                .password("$2a$10$EsIMfxbJ6NuvwX7MDj4WqOYFzLU9U/lddCyn0nic5dFo3VfJYrXYC") 	// 암호화된 비밀번호
+//                .roles("MEMBER");
+        auth
+                .userDetailsService(customUserService())
+                .passwordEncoder(passwordEncoder());
 
     }
 
