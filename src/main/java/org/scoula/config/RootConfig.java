@@ -16,7 +16,10 @@ import javax.sql.DataSource;
 
 @Configuration
 @ComponentScan(basePackages={ "org.scoula.board.service" })
-@MapperScan(basePackages  = {"org.scoula.board.mapper"})
+@MapperScan(basePackages  = {
+        "org.scoula.board.mapper",
+        "org.scoula.security.mapper"
+})
 public class RootConfig {
     @Bean
     public DataSource dataSource() {
