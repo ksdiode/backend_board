@@ -96,7 +96,8 @@ create table tbl_board_attachment (
     path varchar(256) not null,			-- 서버에서의 파일 경로
     content_type varchar(56),				-- content-type
     size integer,								-- 파일의 크기
-    bno integer foreign key references on tbl_board(bno),
+    bno integer not null,
+    constraint foreign key references tbl_board(bno),
     reg_date datetime default now()
 );
 
