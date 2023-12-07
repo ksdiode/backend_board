@@ -36,8 +36,6 @@ public class BoardController {
     }
 
 
-
-
     @GetMapping("/create")
     public void create(@ModelAttribute("board") BoardVO board) {
         log.info("create");
