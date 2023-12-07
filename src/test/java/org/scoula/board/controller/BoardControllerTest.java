@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.scoula.config.RootConfig;
 import org.scoula.config.ServletConfig;
+import org.scoula.security.config.SecurityConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -21,6 +22,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @WebAppConfiguration
 @ContextConfiguration(classes = {
         RootConfig.class,
+        SecurityConfig.class,
         ServletConfig.class
 })
 @Log4j
@@ -37,13 +39,16 @@ class BoardControllerTest {
 
     @Test
     public void testList() throws Exception {
-
         log.info(
-                mockMvc	.perform(MockMvcRequestBuilders.get("/board/list"))	// ResultActions 리턴
-                        .andReturn()				// MvcResult 리턴
-                        .getModelAndView()	// ModelAndView 리턴
-                        .getModelMap()			// Model 리턴
+                mockMvc.perform(
+                                MockMvcRequestBuilders.get("/board/list")
+                                        .param("pageNum", "2")
+                                        .param("amount", "50"))
+                        .andReturn()
+                        .getModelAndView()
+                        .getModelMap()
         );
+
     }
 
     @Test

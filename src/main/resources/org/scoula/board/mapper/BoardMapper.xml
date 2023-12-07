@@ -7,7 +7,9 @@
 
     <select id="getList" resultType="BoardVO">
         <![CDATA[
-		select * from tbl_board
+		   select * from tbl_board
+           order by no desc
+           limit #{offset} , #{amount}
 		]]>
     </select>
 

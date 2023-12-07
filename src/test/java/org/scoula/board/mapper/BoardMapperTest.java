@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.scoula.board.domain.BoardVO;
 import org.scoula.config.RootConfig;
+import org.scoula.domain.Criteria;
+import org.scoula.security.config.SecurityConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -13,7 +15,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = { RootConfig.class })
+@ContextConfiguration(classes = { RootConfig.class, SecurityConfig.class })
 @Log4j
 class BoardMapperTest {
 
@@ -21,7 +23,12 @@ class BoardMapperTest {
     private BoardMapper mapper;
     @Test
     void testGetList() {
-        for(BoardVO board : mapper.getList()) {
+        Criteria cri = new Criteria();
+        //10개씩 3페이지
+        cri.setPageNum(3);
+        cri.setAmount(10);
+
+        for(BoardVO board : mapper.getList(cri)) {
             log.info(board);
         }
 

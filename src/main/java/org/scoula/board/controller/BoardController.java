@@ -3,6 +3,7 @@ package org.scoula.board.controller;
 import lombok.extern.log4j.Log4j;
 import org.scoula.board.domain.BoardVO;
 import org.scoula.board.service.BoardService;
+import org.scoula.domain.Criteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,11 +23,13 @@ public class BoardController {
     private BoardService service;
 
     @GetMapping("/list")
-    public void list(Model model) {
-        log.info("list");
-        model.addAttribute("list", service.getList());
+    public void list(@ModelAttribute("cri") Criteria cri, Model model) {
+
+        log.info("list: " + cri);
+        model.addAttribute("list", service.getList(cri));
 
     }
+
 
 
     @GetMapping("/create")

@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.scoula.board.domain.BoardVO;
 import org.scoula.config.RootConfig;
+import org.scoula.domain.Criteria;
+import org.scoula.security.config.SecurityConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -12,7 +14,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = {RootConfig.class} )
+@ContextConfiguration(classes = {RootConfig.class, SecurityConfig.class} )
 @Log4j
 public class BoardServiceImplTest {
 
@@ -22,9 +24,10 @@ public class BoardServiceImplTest {
     @Test
     public void testGetList() {
 
-        for(BoardVO board: service.getList()) {
+        for(BoardVO board: service.getList(new Criteria(2, 10))) {
             log.info(board);
         }
+
 
     }
 

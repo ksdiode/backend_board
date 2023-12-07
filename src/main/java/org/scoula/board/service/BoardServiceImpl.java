@@ -2,6 +2,7 @@ package org.scoula.board.service;
 
 import java.util.List;
 
+import org.scoula.domain.Criteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.scoula.board.domain.BoardVO;
@@ -17,12 +18,13 @@ public class BoardServiceImpl implements BoardService {
     private BoardMapper mapper;
 
     @Override
-    public List<BoardVO> getList() {
+    public List<BoardVO> getList(Criteria cri) {
 
-        log.info("getList..........");
+        log.info("get List with criteria: " + cri);
 
-        return mapper.getList();
+        return mapper.getList(cri);
     }
+
 
 
     @Override
