@@ -1,6 +1,7 @@
 package org.scoula.board.domain;
 
 import java.util.Date;
+import java.util.List;
 
 import lombok.Data;
 
@@ -19,6 +20,7 @@ public class BoardVO {
     @NotBlank(message="내용은 필수 항목입니다.")
     private String content;
 
+    private List<BoardAttachmentVO> attaches;
 
     private Date regDate;
     private Date updateDate;

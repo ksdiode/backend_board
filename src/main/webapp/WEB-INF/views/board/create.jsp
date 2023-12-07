@@ -12,28 +12,41 @@
 <script>
     $(document).ready(function() {
 		$('#content').summernote({
-            height: 300,				// 에디터 높이
-            focus: true,				// 에디터 로딩 후 포커스 부여 여부
+            height: 300,			// 에디터 높이
+            focus: true,			// 에디터 로딩 후 포커스 부여 여부
             lang: "ko-KR",			// 한글 설정
-         });
-    });
+        });
+
+        const attaches = $('[name="attaches"]');
+        const attachList = $('#attach-list');
+
+        attaches.change(function (e) {
+            let fileList = '';
+            for(let file of this.files) {
+                let fileStr = `<div><i class="fa-solid fa-file"></i> \${file.name}(\${file.size.formatBytes()})</div>`;
+                fileList += fileStr;
+            }
+            attachList.html(fileList);
+        });
+});
 </script>
 
 <h1 class="page-header my-4"><i class="far fa-edit"></i> 새 글쓰기</h1>
 
 <div >
-    <form:form modelAttribute="board" role="form" >
-
+    <form:form modelAttribute="board" action="?_csrf=${_csrf.token}" enctype="multipart/form-data"  role="form">
         <div class="form-group">
             <form:label path="title">제목</form:label>
             <form:input path="title" cssClass="form-control" />
             <form:errors path="title" cssClass="error"/>
         </div>
 
+        <!-- writer 설정 부분 제거 -->
+
         <div class="form-group">
-            <form:label path="writer">작성자</form:label>
-            <form:input path="writer" cssClass="form-control" />
-            <form:errors path="writer" cssClass="error"/>
+            <label for="attaches">첨부파일</label>
+            <div id="attach-list" class="my-1"></div>
+            <input type="file" class="form-control-file border" multiple id="attaches" name="files"/>
         </div>
 
         <div class="form-group">
@@ -41,6 +54,7 @@
             <form:textarea path="content" class="form-control"></form:textarea>
             <form:errors path="content" cssClass="error"/>
         </div>
+
 
         <button type="submit" class="btn btn-primary"><i class="fas fa-check"></i> 확인</button>
         <button type="reset" class="btn btn-primary"><i class="fas fa-undo"></i> 취소</button>

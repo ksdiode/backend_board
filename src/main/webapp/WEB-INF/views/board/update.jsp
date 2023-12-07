@@ -23,12 +23,11 @@
 <h1 class="page-header my-4"><i class="far fa-edit"></i> 글 수정</h1>
 
 <div>
-    <form:form modelAttribute="board" role="form" >
+    <form:form modelAttribute="board" action="?_csrf=${_csrf.token}" enctype="multipart/form-data" role="form" >
         <input type="hidden" name="pageNum" value="${cri.pageNum}"/>
         <input type="hidden" name="amount" value="${cri.amount}"/>
         <input type="hidden" name="type" value="${cri.type}"/>
         <input type="hidden" name="keyword" value="${cri.keyword}"/>
-
 
 
         <form:hidden path="no"/>
@@ -41,6 +40,27 @@
         </div>
 
         <!-- writer 설정 부분 제거 -->
+
+
+        <div class="my-3">
+            <label for="attaches">첨부파일</label>
+            <c:forEach var="file" items="${board.attaches}">
+                <div>
+                    <i class="fa-solid fa-floppy-disk"></i> ${file.filename}
+                    (${file.formatSize})
+                    <button type="button" data-no="${file.no}"
+                            class="btn btn-danger btn-sm py-0 px-1 remove-attachment">
+                        <i class="fa-solid fa-times"></i>
+                    </button>
+                </div>
+            </c:forEach>
+        </div>
+
+        <div class="form-group">
+            <label for="attaches">추가 첨부파일</label>
+            <div id="attach-list" class="my-1"></div>
+            <input type="file" class="form-control-file border" multiple name="files" />
+        </div>
 
         <div class="form-group">
             <form:label path="content">내용</form:label>

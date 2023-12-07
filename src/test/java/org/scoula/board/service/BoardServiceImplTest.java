@@ -11,8 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = {RootConfig.class, SecurityConfig.class} )
 @Log4j
@@ -46,7 +44,7 @@ public class BoardServiceImplTest {
         board.setContent("새로 작성하는 내용");
         board.setWriter("user1");
 
-        service.create(board);
+        service.create(board, null);
 
         log.info("생성된 게시물의 번호: " + board.getNo());
     }

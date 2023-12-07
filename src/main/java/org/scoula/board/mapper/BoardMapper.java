@@ -1,6 +1,7 @@
 package org.scoula.board.mapper;
 
 import org.apache.ibatis.annotations.Select;
+import org.scoula.board.domain.BoardAttachmentVO;
 import org.scoula.board.domain.BoardVO;
 import org.scoula.domain.Criteria;
 
@@ -19,5 +20,13 @@ public interface BoardMapper {
     public int delete(Long no);
 
     public int getTotalCount(Criteria cri);
+
+    public void createAttachment(BoardAttachmentVO attach);
+
+    public List<BoardAttachmentVO> getAttachmentList(Long bno);
+
+    public BoardAttachmentVO getAttachment(Long no);
+
+    public int deleteAttachment(Long no);
 
 }

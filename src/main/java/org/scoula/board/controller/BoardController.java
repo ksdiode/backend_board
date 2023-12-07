@@ -1,6 +1,7 @@
 package org.scoula.board.controller;
 
 import lombok.extern.log4j.Log4j;
+import org.scoula.board.domain.BoardAttachmentVO;
 import org.scoula.board.domain.BoardVO;
 import org.scoula.board.service.BoardService;
 import org.scoula.domain.Criteria;
@@ -10,11 +11,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.security.Principal;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -61,20 +65,19 @@ public class BoardController {
 
 
     @PostMapping("/create")
-    public String create(@Valid @ModelAttribute("board") BoardVO board,
-                         Errors errors,
-                         RedirectAttributes ra,
-                         Principal principal) {
+    public String create(@Valid @ModelAttribute("board") BoardVO board, Errors errors,
+                         List<MultipartFile> files, RedirectAttributes ra, Principal principal) {
+        String username = principal.getName();
+        board.setWriter(username);
 
         log.info("create: " + board);
 
         if(errors.hasErrors()) {
+            log.error(errors);
             return "board/create";
         }
 
-        String username = principal.getName();
-        board.setWriter(username);
-        service.create(board);
+        service.create(board, files);
 
         ra.addFlashAttribute("result", board.getNo());
 
@@ -115,6 +118,15 @@ public class BoardController {
         }
 
         return "redirect:" + cri.getLink("/board/list");
+    }
+
+    @GetMapping("/download/{no}")
+    @ResponseBody	// view를 사용하지 않고, 직접 내보냄
+    public void download(@PathVariable("no") Long no, HttpServletResponse response) throws Exception {
+
+        BoardAttachmentVO attach = service.getAttachment(no);
+        attach.download(response);
+
     }
 
 }
