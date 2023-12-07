@@ -14,6 +14,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.security.Principal;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 @Controller
 @Log4j
@@ -23,9 +25,24 @@ public class BoardController {
     @Autowired
     private BoardService service;
 
+
+    private Map<String, String> getSearchTypes() {
+        Map<String, String> map = new LinkedHashMap<String, String>();
+        map.put("", "-- 검색대상선택 --");
+        map.put("T", "제목");
+        map.put("W", "작성자");
+        map.put("C", "내용");
+        map.put("TC", "제목+내용");
+        map.put("TW", "제목+작성자");
+        map.put("TWC", "제목+작성자+내용");
+
+        return map;
+    }
+
     @GetMapping("/list")
     public void list(@ModelAttribute("cri") Criteria cri, Model model) {
         log.info("list: " + cri);
+        model.addAttribute("searchTypes", getSearchTypes());
         model.addAttribute("list", service.getList(cri));
 
         int total = service.getTotal(cri);
