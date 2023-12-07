@@ -4,6 +4,7 @@ import lombok.extern.log4j.Log4j;
 import org.scoula.board.domain.BoardVO;
 import org.scoula.board.service.BoardService;
 import org.scoula.domain.Criteria;
+import org.scoula.domain.PageDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,6 +28,7 @@ public class BoardController {
 
         log.info("list: " + cri);
         model.addAttribute("list", service.getList(cri));
+        model.addAttribute("pageMaker", new PageDTO(cri, 156));	// 임의로 156 요청
 
     }
 
