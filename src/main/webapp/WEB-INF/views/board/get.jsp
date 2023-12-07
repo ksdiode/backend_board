@@ -30,12 +30,13 @@
 </div>
 
 <div class="mt-4">
-    <a href="list" class="btn btn-primary"><i class="fas fa-list"></i> 목록</a>
-    <a href="update?no=${board.no}" class="btn btn-primary"><i class="far fa-edit"></i> 수정</a>
-    <a href="#" class="btn btn-primary delete"><i class="fas fa-trash-alt"></i> 삭제</a>
+    <a href="${cri.getLink('list')}" class="btn btn-primary"><i class="fas fa-list"></i> 목록</a>
+    <a href="${cri.getLink('update', board.no)}" class="btn btn-primary"><i class="far fa-edit"></i> 수정</a>
+    <a href="#" class="delete btn btn-primary"><i class="fas fa-trash-alt"></i> 삭제</a>
 </div>
 
-<form action="delete" method="post" id="deleteForm">
+
+<form action="${cri.getLink('delete')}" method="post" id="deleteForm">
     <input type="hidden" name="no" value="${board.no}"/>
 </form>
 

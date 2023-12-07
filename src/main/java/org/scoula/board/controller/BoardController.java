@@ -63,14 +63,15 @@ public class BoardController {
     }
 
     @GetMapping({ "/get", "/update" })
-    public void get(@RequestParam("no") Long no, Model model) {
+    public void get(@ModelAttribute("cri") Criteria cri, @RequestParam("no") Long no, Model model) {
 
         log.info("/get or update");
         model.addAttribute("board", service.get(no));
     }
 
     @PostMapping("/update")
-    public String update(@Valid @ModelAttribute("board") BoardVO board,
+    public String update(@ModelAttribute("cri") Criteria cri,
+                         @Valid @ModelAttribute("board") BoardVO board,
                          Errors errors,
                          RedirectAttributes ra) {
         log.info("update:" + board);
@@ -82,18 +83,19 @@ public class BoardController {
         if (service.update(board)) {
             ra.addFlashAttribute("result", "success");
         }
-        return "redirect:/board/list";
+        return "redirect:" + cri.getLink("/board/get", board.getNo());
     }
 
 
     @PostMapping("/delete")
-    public String delete(@RequestParam("no") Long no, RedirectAttributes ra) {
+    public String delete(@ModelAttribute("cri") Criteria cri, @RequestParam("no") Long no, RedirectAttributes ra) {
 
         log.info("delete..." + no);
         if (service.delete(no)) {
             ra.addFlashAttribute("result", "success");
         }
-        return "redirect:/board/list";
+
+        return "redirect:" + cri.getLink("/board/list");
     }
 
 }

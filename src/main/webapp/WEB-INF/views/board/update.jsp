@@ -24,6 +24,8 @@
 
 <div>
     <form:form modelAttribute="board" role="form" >
+        <input type="hidden" name="pageNum" value="${cri.pageNum}"/>
+        <input type="hidden" name="amount" value="${cri.amount}"/>
         <form:hidden path="no"/>
         <form:hidden path="writer"/>
 
@@ -43,7 +45,7 @@
 
         <button type="submit" class="btn btn-primary"><i class="fas fa-check"></i> 확인</button>
         <button type="reset" class="btn btn-primary"><i class="fas fa-undo"></i> 취소</button>
-        <a href="get?no=${board.no}" class="btn btn-primary"><i class="fas fa-file-alt"></i> 돌아가기</a>
+        <a href="${cri.getLink('get', board.no)}" class="btn btn-primary"><i class="fas fa-file-alt"></i> 돌아가기</a>
     </form:form>
 </div>
 

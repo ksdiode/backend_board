@@ -44,8 +44,6 @@ public class Criteria {
         return getLink("", page);
     }
 
-
-
     public String getLink(String base, int page) {
         return UriComponentsBuilder.fromPath(base)
                 .queryParam("pageNum", page)
@@ -63,7 +61,5 @@ public class Criteria {
                 .queryParam("keyword", keyword)
                 .toUriString();
     }
-
-}
 
 }
