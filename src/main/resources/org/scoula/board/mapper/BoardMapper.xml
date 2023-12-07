@@ -39,7 +39,7 @@
             <include refid="criteria"></include>
         </where>
         order by no desc
-        limit (#{offset}, #{amount}
+        limit #{offset}, #{amount}
     </select>
 
     <select id="get" resultType="BoardVO">

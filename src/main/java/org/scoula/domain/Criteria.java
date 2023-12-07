@@ -48,6 +48,8 @@ public class Criteria {
         return UriComponentsBuilder.fromPath(base)
                 .queryParam("pageNum", page)
                 .queryParam("amount", amount)
+                .queryParam("type", type)
+                .queryParam("keyword", keyword)
                 .toUriString();
 
     }
