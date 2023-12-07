@@ -62,4 +62,11 @@ public class Criteria {
                 .toUriString();
     }
 
+    public String[] getTypeArr() {
+        return type == null ?
+                new String[] {} : 	// 빈 배열 리턴
+                type.split("");		// 한글자 단위로 분리된 배열 리턴
+
+    }
+
 }

@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
@@ -77,4 +79,20 @@ class BoardMapperTest {
     public void testDelete() {
         log.info("DELETE COUNT: " + mapper.delete(3L));
     }
+
+
+    @Test
+    public void testSearch() {
+        Criteria cri = new Criteria();
+
+        cri.setKeyword("새로");
+        cri.setType("TC");	// 제목, 내용에서 검색
+
+        List<BoardVO> list = mapper.getList(cri);
+
+        for(BoardVO board: list) {
+            log.info(board);
+        }
+    }
+
 }
