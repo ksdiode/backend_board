@@ -6,6 +6,7 @@ import org.scoula.board.domain.BoardVO;
 import org.scoula.domain.Criteria;
 
 public interface BoardService {
+    public int getTotal(Criteria cri);
 
     public List<BoardVO> getList(Criteria cri);
 

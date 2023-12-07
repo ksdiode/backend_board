@@ -18,6 +18,13 @@ public class BoardServiceImpl implements BoardService {
     private BoardMapper mapper;
 
     @Override
+    public int getTotal(Criteria cri) {
+        log.info("get total count");
+
+        return mapper.getTotalCount(cri);
+    }
+
+    @Override
     public List<BoardVO> getList(Criteria cri) {
 
         log.info("get List with criteria: " + cri);

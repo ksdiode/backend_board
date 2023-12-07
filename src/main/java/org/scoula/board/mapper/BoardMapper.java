@@ -18,4 +18,6 @@ public interface BoardMapper {
 
     public int delete(Long no);
 
+    public int getTotalCount(Criteria cri);
+
 }

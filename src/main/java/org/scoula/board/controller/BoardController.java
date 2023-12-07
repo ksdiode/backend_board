@@ -24,13 +24,17 @@ public class BoardController {
     private BoardService service;
 
     @GetMapping("/list")
-    public void list(@ModelAttribute("cri") Criteria cri, Model model) {
-
+    public void list(Criteria cri, Model model) {
         log.info("list: " + cri);
         model.addAttribute("list", service.getList(cri));
-        model.addAttribute("pageMaker", new PageDTO(cri, 156));	// 임의로 156 요청
 
+        int total = service.getTotal(cri);
+        log.info("total: " + total);
+
+    //  model.addAttribute("pageMaker", new PageDTO(cri, 123);
+        model.addAttribute("pageMaker", new PageDTO(cri, total));
     }
+
 
 
 
