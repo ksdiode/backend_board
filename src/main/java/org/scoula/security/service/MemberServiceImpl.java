@@ -3,9 +3,7 @@ package org.scoula.security.service;
 
 import lombok.extern.log4j.Log4j;
 import net.coobird.thumbnailator.Thumbnails;
-import org.scoula.security.domain.AuthVO;
-import org.scoula.security.domain.MemberVO;
-import org.scoula.security.domain.SignupVO;
+import org.scoula.security.domain.*;
 import org.scoula.security.mapper.MemberMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -18,7 +16,6 @@ import java.io.IOException;
 @Service
 @Log4j
 public class MemberServiceImpl implements MemberService {
-    public static final String AVATAR_UPLOAD_DIR = "c:/upload/avatar";
 
     @Autowired
     MemberMapper mapper;
@@ -45,32 +42,28 @@ public class MemberServiceImpl implements MemberService {
         mapper.createAuth(auth);
 
         // 4. avatar 이미지 저장
-        uploadAvatar(member);
+        Avatar.upload(member.getUsername(), member.getAvatar());
     }
 
 
-    private void uploadAvatar(SignupVO member) {
-        MultipartFile avatar = member.getAvatar();
-        if(!avatar.isEmpty()) {
-            File dest = new File(AVATAR_UPLOAD_DIR, member.getUsername() + ".png");
-            try {
-                Thumbnails.of(avatar.getInputStream())
-                        .size(50, 50)
-                        .toFile(dest);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
+
+    @Override
+    public boolean checkPassword(String rawPassword, String encPassword) {
+        log.info(rawPassword + "-------------" + encPassword);
+        return pwEncoder.matches(rawPassword, encPassword);
     }
 
     @Override
-    public File getAvatar(String username) {
-        File avatar = new File(MemberServiceImpl.AVATAR_UPLOAD_DIR, username + ".png");
-        if(!avatar.exists()) {	// 파일이 존재하지 않으면
-            avatar = new File(MemberServiceImpl.AVATAR_UPLOAD_DIR, "unknown.png");
-        }
-
-        return avatar;
+    public void update(ProfileUpdateVO member) {
+        mapper.update(member);
+        Avatar.upload(member.getUsername(), member.getAvatar());
     }
 
+    @Override
+    public void changePassword(PasswordChangeVO member) {
+        // 비밀번호 암호화
+        String encPassword = pwEncoder.encode(member.getPassword());
+        member.setEncPassword(encPassword);
+        mapper.changePassword(member);
+    }
 }

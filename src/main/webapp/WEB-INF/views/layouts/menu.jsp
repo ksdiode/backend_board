@@ -28,7 +28,7 @@
             <sec:authorize access="isAuthenticated()">
                 <sec:authentication property="principal.username" var="username" />
                 <li class="nav-item">
-                    <a class="nav-link" href="/member/profile">
+                    <a class="nav-link" href="/auth/profile">
                         <img src="/auth/avatar/${username}" class="avatar-sm"/>
                         ${username}
                     </a>

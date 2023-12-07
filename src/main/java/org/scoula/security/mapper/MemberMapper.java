@@ -1,8 +1,6 @@
 package org.scoula.security.mapper;
 
-import org.scoula.security.domain.AuthVO;
-import org.scoula.security.domain.MemberVO;
-import org.scoula.security.domain.SignupVO;
+import org.scoula.security.domain.*;
 
 public interface MemberMapper {
     public MemberVO get(String username);
@@ -11,4 +9,7 @@ public interface MemberMapper {
 
     public void createAuth(AuthVO auth);
 
+    public void update(ProfileUpdateVO member);
+
+    public void changePassword(PasswordChangeVO member);
 }
