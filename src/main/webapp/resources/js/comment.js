@@ -72,12 +72,12 @@ async function loadComments(username) {
 		const commentEl = $(createCommentTemplate(comment, username));
 		$('.comment-list').append(commentEl);
 
-//		let replyListEl = commentEl.find('.reply-list');
-//		//  답글 목록 처리
-//		for(let reply of comment.replyList) {
-// 			let replyEl = $(createReplyTemplate(reply, username));
-//			replyListEl.append(replyEl);
-//		};
+		let replyListEl = commentEl.find('.reply-list');
+		//  답글 목록 처리
+		for(let reply of comment.replyList) {
+ 			let replyEl = $(createReplyTemplate(reply, username));
+			replyListEl.append(replyEl);
+		};
 	}
 }
 
@@ -170,7 +170,7 @@ function setup_comment(bno, writer) {
 
     $('.comment-add-btn').click(createComment);
 
-	// 댓글 수정, 삭제 버튼 처리 - 이벤트 버블링(이벤트 처리 위임)
+	// 댓글 처리 관련 이벤트 처리 ====================================
 	// 댓글 수정 보기 버튼 클릭
 	$('.comment-list').on('click', '.comment-update-show-btn', showUpdateComment);
 
@@ -180,8 +180,9 @@ function setup_comment(bno, writer) {
 	// 수정 취소 버튼 클릭
 	$('.comment-list').on('click', '.comment-update-cancel-btn', cancelCommentUpdate);
 
-
 	// 삭제 버튼 클릭
 	$('.comment-list').on('click', '.comment-delete-btn', deleteComment);
 
+
+    setup_reply();
 }

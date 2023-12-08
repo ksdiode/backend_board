@@ -8,13 +8,14 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
 <script src="/resources/js/rest.js"></script>
 <script src="/resources/js/comment.js"></script>
+<script src="/resources/js/reply.js"></script>
 
 <script>
     const COMMENT_URL = '/api/board/${board.no}/comment/';
+    const REPLY_URL = '/api/board/${board.no}/reply/';
+
     const bno = ${board.no};		// 글번호
     const writer = '${username}';	// 작성자(로그인 유저)
-
-    console.log(bno, writer);
 
     $(document).ready(function() {
         setup_comment(bno, writer);
