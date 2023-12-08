@@ -118,3 +118,15 @@ create table tbl_comment (
 	constraint fk_comment_member foreign key(writer) references tbl_member(username)
 
 );
+
+
+// 답글 테이블
+create table tbl_reply (
+	no 			integer auto_increment primary key,
+	cno 			integer not null,				-- comment의 no
+	content		varchar(1000) not null,
+	writer		varchar(50) not null,
+	reg_date		datetime default now(),
+	update_date	datetime default now(),
+	constraint fk_reply_comment foreign key(cno) references tbl_comment(no)
+);
