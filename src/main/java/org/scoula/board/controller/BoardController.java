@@ -93,16 +93,15 @@ public class BoardController {
 
     @PostMapping("/update")
     public String update(@ModelAttribute("cri") Criteria cri,
-                         @Valid @ModelAttribute("board") BoardVO board,
-                         Errors errors,
-                         RedirectAttributes ra) {
+                         @Valid @ModelAttribute("board") BoardVO board, Errors errors,
+                         List<MultipartFile> files, RedirectAttributes ra) {
         log.info("update:" + board);
 
         if(errors.hasErrors()) {
             return "board/update";
         }
 
-        if (service.update(board)) {
+        if (service.update(board, files)) {
             ra.addFlashAttribute("result", "success");
         }
         return "redirect:" + cri.getLink("/board/get", board.getNo());

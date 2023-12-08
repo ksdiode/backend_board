@@ -16,7 +16,7 @@ public interface BoardService {
 
     public void create(BoardVO board, List<MultipartFile> files);
 
-    public boolean update(BoardVO board);
+    public boolean update(BoardVO board, List<MultipartFile> files);
 
     public boolean delete(Long no);
 

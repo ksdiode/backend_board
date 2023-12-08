@@ -9,27 +9,7 @@
 <script src="/resources/vendors/summernote/summernote-lite.min.js"></script>
 <script src="/resources/vendors/summernote/lang/summernote-ko-KR.min.js"></script>
 
-<script>
-    $(document).ready(function() {
-		$('#content').summernote({
-            height: 300,			// 에디터 높이
-            focus: true,			// 에디터 로딩 후 포커스 부여 여부
-            lang: "ko-KR",			// 한글 설정
-        });
-
-        const attaches = $('[name="attaches"]');
-        const attachList = $('#attach-list');
-
-        attaches.change(function (e) {
-            let fileList = '';
-            for(let file of this.files) {
-                let fileStr = `<div><i class="fa-solid fa-file"></i> \${file.name}(\${file.size.formatBytes()})</div>`;
-                fileList += fileStr;
-            }
-            attachList.html(fileList);
-        });
-});
-</script>
+<script src="/resources/js/board.js"></script>
 
 <h1 class="page-header my-4"><i class="far fa-edit"></i> 새 글쓰기</h1>
 
@@ -46,7 +26,7 @@
         <div class="form-group">
             <label for="attaches">첨부파일</label>
             <div id="attach-list" class="my-1"></div>
-            <input type="file" class="form-control-file border" multiple id="attaches" name="files"/>
+            <input type="file" class="form-control-file border" multiple name="files"/>
         </div>
 
         <div class="form-group">

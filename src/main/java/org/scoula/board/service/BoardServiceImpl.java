@@ -68,12 +68,24 @@ public class BoardServiceImpl implements BoardService {
     }
 
 
+    @Transactional
     @Override
-    public boolean update(BoardVO board) {
-
+    public boolean update(BoardVO board, List<MultipartFile> files) {
         log.info("update......" + board);
 
-        return mapper.update(board) == 1;
+        boolean result = mapper.update(board) == 1;
+
+        if(files == null) return result;
+
+        Long no = board.getNo();
+
+        for(MultipartFile part: files) {
+            if(part.isEmpty()) continue;
+            BoardAttachmentVO attach = new BoardAttachmentVO(no, part);
+            mapper.createAttachment(attach);
+        }
+
+        return result;
     }
 
     @Override

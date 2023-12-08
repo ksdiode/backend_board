@@ -4,14 +4,7 @@
 
 <%@include file="../layouts/header.jsp"%>
 
-<script>
-    $(document).ready(async function() {
-        $('.delete').click(function(){
-            if(!confirm('정말 삭제할까요?')) return;
-            $('#deleteForm').submit();
-        });
-    });
-</script>
+<script src="/resources/js/board.js"></script>
 
 <h1 class="page-header my-4"><i class="far fa-file-alt"></i> ${board.title}</h1>
 
@@ -49,8 +42,8 @@
     </c:if>
 </div>
 
-
 <form action="${cri.getLink('delete')}" method="post" id="deleteForm">
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
     <input type="hidden" name="no" value="${board.no}"/>
 </form>
 

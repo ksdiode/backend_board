@@ -59,7 +59,7 @@ public class BoardServiceImplTest {
         }
 
         board.setTitle("제목 수정합니다.");
-        log.info("update RESULT: " + service.update(board));
+        log.info("update RESULT: " + service.update(board, null));
     }
 
     @Test

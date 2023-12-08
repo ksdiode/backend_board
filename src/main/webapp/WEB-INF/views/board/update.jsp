@@ -9,16 +9,7 @@
 <script src="/resources/vendors/summernote/summernote-lite.min.js"></script>
 <script src="/resources/vendors/summernote/lang/summernote-ko-KR.min.js"></script>
 
-<script>
-    $(document).ready(function() {
-		$('#content').summernote({
-            height: 300,		// 에디터 높이
-            focus: true,		// 에디터 로딩 후 포커스 부여 여부
-            lang: "ko-KR",		// 한글 설정
-         });
-
-    });
-</script>
+<script src="/resources/js/board.js"></script>
 
 <h1 class="page-header my-4"><i class="far fa-edit"></i> 글 수정</h1>
 
@@ -41,7 +32,6 @@
 
         <!-- writer 설정 부분 제거 -->
 
-
         <div class="my-3">
             <label for="attaches">첨부파일</label>
             <c:forEach var="file" items="${board.attaches}">
@@ -49,7 +39,7 @@
                     <i class="fa-solid fa-floppy-disk"></i> ${file.filename}
                     (${file.formatSize})
                     <button type="button" data-no="${file.no}"
-                            class="btn btn-danger btn-sm py-0 px-1 remove-attachment">
+                            class="btn btn-danger btn-sm py-0 px-1 delete-attachment">
                         <i class="fa-solid fa-times"></i>
                     </button>
                 </div>
