@@ -41,6 +41,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.addFilterBefore(filter, CsrfFilter.class);
 
+        // api 호출은 csrf token 무시
+        http.csrf().ignoringAntMatchers("/api/**");
+
         http.authorizeRequests()
             // 모두 허용
             .antMatchers("/test", "/test/all").permitAll()

@@ -16,7 +16,7 @@ public class CommentController {
 
     @GetMapping("")
     public List<CommentVO> readComments(@PathVariable Long bno) {
-        return mapper.readAll(bno);
+        return mapper.getList(bno);
     }
 
     @GetMapping("/{no}")
@@ -26,6 +26,7 @@ public class CommentController {
 
     @PostMapping("")
     public CommentVO create(@RequestBody CommentVO vo) {
+
         mapper.create(vo);
         return mapper.get(vo.getNo());
     }

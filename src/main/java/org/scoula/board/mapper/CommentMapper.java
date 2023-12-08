@@ -5,7 +5,7 @@ import org.scoula.board.domain.CommentVO;
 import java.util.List;
 
 public interface CommentMapper {
-    List<CommentVO> readAll(Long bno);
+    List<CommentVO> getList(Long bno);
     CommentVO get(Long no);
 
     void create(CommentVO vo);
