@@ -102,3 +102,19 @@ create table tbl_board_attachment (
 );
 
 
+
+// 댓글 테이블
+drop table if exists tbl_comment;
+
+create table tbl_comment (
+	no						integer auto_increment primary key,
+	bno 					integer not null,					-- tbl_board에 대한 FK
+	writer				varchar(50) not null,			-- tbl_member에 대한 FK
+	content			varchar(2000) not null,
+ 	reg_date			datetime default now(),
+	update_date	datetime default now(),
+
+	constraint fk_comment_board foreign key(bno) references tbl_board(bno),
+	constraint fk_comment_member foreign key(writer) references tbl_member(username)
+
+);
